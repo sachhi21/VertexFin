@@ -1,9 +1,9 @@
 ﻿using System;
 
 
-namespace UserService.Domain.Models
+namespace VertexFin.Domain.Models
 {
-    public class User
+    public class User : BaseEntity
     {
         public Guid Id { get; set; }
         public required string Username { get; set; }

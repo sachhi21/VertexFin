@@ -1,9 +1,9 @@
 ﻿using System;
 
 
-namespace UserService.Domain.Models
+namespace VertexFin.Domain.Models
 {
-    public class Permission
+    public class Permission : BaseEntity
     {
         public Guid Id { get; set; }
         public required string Name { get; set; }  // View Users, Edit Transactions, etc.

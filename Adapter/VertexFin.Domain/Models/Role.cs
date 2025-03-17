@@ -1,9 +1,9 @@
 ﻿using System;
 
 
-namespace UserService.Domain.Models
+namespace VertexFin.Domain.Models
 {
-    public class Role
+    public class Role : BaseEntity
     {
         public Guid Id { get; set; }
         public required string Name { get; set; }  // Admin, User, Manager, etc.

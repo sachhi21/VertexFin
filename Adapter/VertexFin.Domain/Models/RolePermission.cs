@@ -1,8 +1,8 @@
 using System;
 
-namespace UserService.Domain.Models
+namespace VertexFin.Domain.Models
 {
-    public class RolePermission
+    public class RolePermission : BaseEntity
     {
         public Guid RoleId { get; set; }
         public Guid PermissionId { get; set; }

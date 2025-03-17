@@ -1,6 +1,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
-using UserService.Infrastructure.Persistence; // Ensure this is correct
+using VertexFin.Domain.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +10,7 @@ builder.Services.AddOpenApi();
 
 // Add services to the container.
 var ConnectionString = builder.Configuration.GetConnectionString("portrecDBConnection");
-builder.Services.AddDbContext<UserDbContext>(options => options.UseSqlServer(ConnectionString, d => d.MigrationsAssembly("UserService")));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(ConnectionString, d => d.MigrationsAssembly("UserService")));
 builder.Services.AddControllers();
 
 var app = builder.Build();
