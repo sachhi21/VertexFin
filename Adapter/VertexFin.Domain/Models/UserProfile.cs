@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace UserService.Domain.Models
+namespace VertexFin.Domain.Models
 {
-    public class UserProfile
+    public class UserProfile : BaseEntity
     {
-        public Guid Id { get; set; }
         public Guid UserId { get; set; }  // Foreign Key to User
         public required string FirstName { get; set; }
         public  required string LastName { get; set; }

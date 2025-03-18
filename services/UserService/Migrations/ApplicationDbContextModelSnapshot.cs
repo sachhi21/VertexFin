@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using UserService.Infrastructure.Persistence;
+using VertexFin.Domain.Data;
 
 #nullable disable
 
 namespace UserService.Migrations
 {
-    [DbContext(typeof(UserDbContext))]
-    partial class UserDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(ApplicationDbContext))]
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -22,11 +22,19 @@ namespace UserService.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("UserService.Domain.Models.KYC", b =>
+            modelBuilder.Entity("VertexFin.Domain.Models.KYC", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DocumentImageUrl")
                         .HasColumnType("nvarchar(max)");
@@ -39,8 +47,19 @@ namespace UserService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("SubmittedAt")
                         .HasColumnType("datetime2");
@@ -56,11 +75,30 @@ namespace UserService.Migrations
                     b.ToTable("KYCs");
                 });
 
-            modelBuilder.Entity("UserService.Domain.Models.Permission", b =>
+            modelBuilder.Entity("VertexFin.Domain.Models.Permission", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -71,11 +109,30 @@ namespace UserService.Migrations
                     b.ToTable("Permissions");
                 });
 
-            modelBuilder.Entity("UserService.Domain.Models.Role", b =>
+            modelBuilder.Entity("VertexFin.Domain.Models.Role", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -86,13 +143,35 @@ namespace UserService.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("UserService.Domain.Models.RolePermission", b =>
+            modelBuilder.Entity("VertexFin.Domain.Models.RolePermission", b =>
                 {
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("PermissionId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("RoleId", "PermissionId");
 
@@ -101,7 +180,7 @@ namespace UserService.Migrations
                     b.ToTable("RolePermissions");
                 });
 
-            modelBuilder.Entity("UserService.Domain.Models.User", b =>
+            modelBuilder.Entity("VertexFin.Domain.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -110,15 +189,34 @@ namespace UserService.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsEmailVerified")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsKYCCompleted")
                         .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
@@ -136,7 +234,7 @@ namespace UserService.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("UserService.Domain.Models.UserProfile", b =>
+            modelBuilder.Entity("VertexFin.Domain.Models.UserProfile", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -145,6 +243,14 @@ namespace UserService.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
@@ -152,9 +258,20 @@ namespace UserService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -171,13 +288,35 @@ namespace UserService.Migrations
                     b.ToTable("UserProfiles");
                 });
 
-            modelBuilder.Entity("UserService.Domain.Models.UserRole", b =>
+            modelBuilder.Entity("VertexFin.Domain.Models.UserRole", b =>
                 {
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -186,26 +325,26 @@ namespace UserService.Migrations
                     b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("UserService.Domain.Models.KYC", b =>
+            modelBuilder.Entity("VertexFin.Domain.Models.KYC", b =>
                 {
-                    b.HasOne("UserService.Domain.Models.User", "User")
+                    b.HasOne("VertexFin.Domain.Models.User", "User")
                         .WithOne("KYC")
-                        .HasForeignKey("UserService.Domain.Models.KYC", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("VertexFin.Domain.Models.KYC", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("UserService.Domain.Models.RolePermission", b =>
+            modelBuilder.Entity("VertexFin.Domain.Models.RolePermission", b =>
                 {
-                    b.HasOne("UserService.Domain.Models.Permission", "Permission")
+                    b.HasOne("VertexFin.Domain.Models.Permission", "Permission")
                         .WithMany("RolePermissions")
                         .HasForeignKey("PermissionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("UserService.Domain.Models.Role", "Role")
+                    b.HasOne("VertexFin.Domain.Models.Role", "Role")
                         .WithMany("RolePermissions")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -216,26 +355,26 @@ namespace UserService.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("UserService.Domain.Models.UserProfile", b =>
+            modelBuilder.Entity("VertexFin.Domain.Models.UserProfile", b =>
                 {
-                    b.HasOne("UserService.Domain.Models.User", "User")
+                    b.HasOne("VertexFin.Domain.Models.User", "User")
                         .WithOne("UserProfile")
-                        .HasForeignKey("UserService.Domain.Models.UserProfile", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("VertexFin.Domain.Models.UserProfile", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("UserService.Domain.Models.UserRole", b =>
+            modelBuilder.Entity("VertexFin.Domain.Models.UserRole", b =>
                 {
-                    b.HasOne("UserService.Domain.Models.Role", "Role")
+                    b.HasOne("VertexFin.Domain.Models.Role", "Role")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("UserService.Domain.Models.User", "User")
+                    b.HasOne("VertexFin.Domain.Models.User", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -246,19 +385,19 @@ namespace UserService.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("UserService.Domain.Models.Permission", b =>
+            modelBuilder.Entity("VertexFin.Domain.Models.Permission", b =>
                 {
                     b.Navigation("RolePermissions");
                 });
 
-            modelBuilder.Entity("UserService.Domain.Models.Role", b =>
+            modelBuilder.Entity("VertexFin.Domain.Models.Role", b =>
                 {
                     b.Navigation("RolePermissions");
 
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("UserService.Domain.Models.User", b =>
+            modelBuilder.Entity("VertexFin.Domain.Models.User", b =>
                 {
                     b.Navigation("KYC");
 
