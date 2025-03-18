@@ -5,7 +5,6 @@ namespace VertexFin.Domain.Models
 {
     public class KYC : BaseEntity
     {
-        public Guid Id { get; set; }
         public Guid UserId { get; set; }  // Foreign Key to User
         public required string DocumentType { get; set; }  // Passport, ID, etc.
         public required string DocumentNumber { get; set; }

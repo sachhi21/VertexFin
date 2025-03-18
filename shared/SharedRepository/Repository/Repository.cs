@@ -54,14 +54,15 @@ namespace PortRec.RepositoryLayer.Repository
             return await Task.FromResult(_dbContext.Set<T>().AsEnumerable());
         }
 
-        public async Task Insert<T>(T entity) where T : BaseEntity
+        public async Task<int> Insert<T>(T entity) where T : BaseEntity
         {
             if (entity == null)
             {
                 throw new ArgumentNullException(nameof(entity));
             }
             await _dbContext.Set<T>().AddAsync(entity);
-            await SaveChanges();
+            int result = await _dbContext.SaveChangesAsync();
+            return result;
         }
 
         public async Task Remove<T>(T entity) where T : BaseEntity
@@ -289,6 +290,11 @@ namespace PortRec.RepositoryLayer.Repository
             }
 
             return await Task.FromResult(result);
+        }
+
+        public async Task<bool> ExistsAsync(Expression<Func<User, bool>> predicate)
+        {
+            return await _dbContext.Users.AnyAsync(predicate);
         }
 
         private async Task<ResultSets> GetData(DbDataReader reader)

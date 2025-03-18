@@ -10,7 +10,9 @@ public interface IRepository
 {
         Task<IEnumerable<T>> GetAll<T>() where T : BaseEntity;
         Task<Tout?> Get<C, Tout>(Guid Id) where Tout : BaseEntity;
-        Task Insert<T>(T entity) where T : BaseEntity;
+        //Task Insert<T>(T entity) where T : BaseEntity;
+        Task<int> Insert<T>(T entity) where T : BaseEntity;
+
         Task Update<T>(T entity) where T : BaseEntity;
         Task Delete<T>(T entity) where T : BaseEntity;
         Task Remove<T>(T entity) where T : BaseEntity;
@@ -22,5 +24,7 @@ public interface IRepository
         Task<T?> ExecuteScalar<T>(string spName, params object[] parameters);
         Task<int> ExecuteNonQuery(string query, params object[] parameters);
         DbSet<T> GetDbSet<T>() where T : BaseEntity;
+        Task<bool> ExistsAsync(Expression<Func<User, bool>> predicate);
+
     }
 }

@@ -20,7 +20,13 @@ namespace VertexFin.Domain.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>()
+           .HasIndex(u => u.Username)
+           .IsUnique();
 
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
             ConfigureUserRole(modelBuilder);
             ConfigureRolePermission(modelBuilder);
             ConfigureUserKYC(modelBuilder);
